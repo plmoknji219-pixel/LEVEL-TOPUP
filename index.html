@@ -187,11 +187,17 @@
       padding: 15px;
       border-radius: 10px;
       margin: 15px 0;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .payment-info strong {
       color: #00e5ff;
+    }
+
+    .payment-note {
+      color: #facc15;
+      font-size: 14px;
+      margin-top: 8px;
     }
 
     .message {
@@ -266,514 +272,598 @@
 
 <body>
 
-  <header>
-    <h1>LEVEL TOP UP</h1>
-    <p>Fast & Easy Game Top Up</p>
-  </header>
+<header>
+  <h1>LEVEL TOP UP</h1>
+  <p>Fast & Easy Game Top Up</p>
+</header>
 
-  <section class="hero">
-    <h2>Welcome to <span>LEVEL TOP UP</span></h2>
-    <p>Fast, easy and secure game top up.</p>
-    <a href="#games" class="btn">TOP UP NOW</a>
-  </section>
+<section class="hero">
+  <h2>Welcome to <span>LEVEL TOP UP</span></h2>
+  <p>Fast, easy and secure game top up.</p>
+  <a href="#games" class="btn">TOP UP NOW</a>
+</section>
 
-  <section class="games" id="games">
+<section class="games" id="games">
 
-    <h2>🎮 Select Your Game</h2>
+  <h2>🎮 Select Your Game</h2>
 
-    <div class="game-box">
+  <div class="game-box">
 
-      <h3>🔥 Free Fire</h3>
-      <p>Choose your Diamond Package</p>
+    <h3>🔥 Free Fire</h3>
+    <p>Choose your Diamond Package</p>
 
-      <div class="packages">
+    <div class="packages">
 
-        <div class="package">
-          <h4>💎 25 Diamonds</h4>
-          <div class="price">৳ 20</div>
-          <button class="buy-btn" onclick="selectPackage('25 Diamonds', 20)">
-            Buy Now
-          </button>
-        </div>
-
-        <div class="package">
-          <h4>💎 50 Diamonds</h4>
-          <div class="price">৳ 35</div>
-          <button class="buy-btn" onclick="selectPackage('50 Diamonds', 35)">
-            Buy Now
-          </button>
-        </div>
-
-        <div class="package">
-          <h4>💎 115 Diamonds</h4>
-          <div class="price">৳ 75</div>
-          <button class="buy-btn" onclick="selectPackage('115 Diamonds', 75)">
-            Buy Now
-          </button>
-        </div>
-
-        <div class="package">
-          <h4>💎 240 Diamonds</h4>
-          <div class="price">৳ 150</div>
-          <button class="buy-btn" onclick="selectPackage('240 Diamonds', 150)">
-            Buy Now
-          </button>
-        </div>
-
-        <div class="package">
-          <h4>💎 610 Diamonds</h4>
-          <div class="price">৳ 380</div>
-          <button class="buy-btn" onclick="selectPackage('610 Diamonds', 380)">
-            Buy Now
-          </button>
-        </div>
-
+      <div class="package">
+        <h4>💎 25 Diamonds</h4>
+        <div class="price">৳ 20</div>
+        <button class="buy-btn"
+          onclick="selectPackage('25 Diamonds',20)">
+          Buy Now
+        </button>
       </div>
 
-      <div class="order-form" id="orderForm">
+      <div class="package">
+        <h4>💎 50 Diamonds</h4>
+        <div class="price">৳ 35</div>
+        <button class="buy-btn"
+          onclick="selectPackage('50 Diamonds',35)">
+          Buy Now
+        </button>
+      </div>
 
-        <h3>📝 Order Details</h3>
+      <div class="package">
+        <h4>💎 115 Diamonds</h4>
+        <div class="price">৳ 75</div>
+        <button class="buy-btn"
+          onclick="selectPackage('115 Diamonds',75)">
+          Buy Now
+        </button>
+      </div>
 
-        <div class="selected-package" id="selectedPackage">
-          Package: -
+      <div class="package">
+        <h4>💎 240 Diamonds</h4>
+        <div class="price">৳ 150</div>
+        <button class="buy-btn"
+          onclick="selectPackage('240 Diamonds',150)">
+          Buy Now
+        </button>
+      </div>
+
+      <div class="package">
+        <h4>💎 610 Diamonds</h4>
+        <div class="price">৳ 380</div>
+        <button class="buy-btn"
+          onclick="selectPackage('610 Diamonds',380)">
+          Buy Now
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ORDER FORM -->
+
+    <div class="order-form" id="orderForm">
+
+      <h3>📝 Order Details</h3>
+
+      <div class="selected-package" id="selectedPackage">
+        Package: -
+      </div>
+
+      <label for="uid">Free Fire UID</label>
+
+      <input
+        type="number"
+        id="uid"
+        placeholder="Enter your Free Fire UID"
+      >
+
+      <label for="playerName">Player Name</label>
+
+      <input
+        type="text"
+        id="playerName"
+        placeholder="Enter your player name"
+      >
+
+      <button
+        class="continue-btn"
+        onclick="showPayment()">
+        Continue to Payment
+      </button>
+
+
+      <!-- PAYMENT -->
+
+      <div class="payment-box" id="paymentBox">
+
+        <h3>💳 Payment</h3>
+
+        <label for="paymentMethod">
+          Select Payment Method
+        </label>
+
+        <select
+          id="paymentMethod"
+          onchange="showPaymentNumber()">
+
+          <option value="">
+            Select Payment Method
+          </option>
+
+          <option value="bKash">
+            bKash
+          </option>
+
+          <option value="Nagad">
+            Nagad
+          </option>
+
+        </select>
+
+
+        <div class="payment-info" id="paymentInfo">
+          Select a payment method.
         </div>
 
-        <label for="uid">Free Fire UID</label>
 
-        <input
-          type="number"
-          id="uid"
-          placeholder="Enter your Free Fire UID"
-        >
-
-        <label for="playerName">Player Name</label>
+        <label for="transactionId">
+          Transaction ID
+        </label>
 
         <input
           type="text"
-          id="playerName"
-          placeholder="Enter your player name"
+          id="transactionId"
+          placeholder="Enter your Transaction ID"
         >
 
-        <button class="continue-btn" onclick="showPayment()">
-          Continue to Payment
+
+        <button
+          class="place-order-btn"
+          onclick="placeOrder()">
+          Place Order
         </button>
 
-        <div class="payment-box" id="paymentBox">
-
-          <h3>💳 Payment</h3>
-
-          <label for="paymentMethod">
-            Select Payment Method
-          </label>
-
-          <select
-            id="paymentMethod"
-            onchange="showPaymentNumber()">
-
-            <option value="">
-              Select Payment Method
-            </option>
-
-            <option value="bKash">
-              bKash
-            </option>
-
-            <option value="Nagad">
-              Nagad
-            </option>
-
-          </select>
-
-          <div class="payment-info" id="paymentInfo">
-            Select a payment method.
-          </div>
-
-          <label for="transactionId">
-            Transaction ID
-          </label>
-
-          <input
-            type="text"
-            id="transactionId"
-            placeholder="Enter your Transaction ID"
-          >
-
-          <button
-            class="place-order-btn"
-            onclick="placeOrder()">
-            Place Order
-          </button>
-
-        </div>
-
-        <div class="message" id="message"></div>
-
       </div>
+
+      <div class="message" id="message"></div>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <section class="success-box" id="successBox">
+<!-- SUCCESS -->
 
-    <div class="success-icon">✅</div>
+<section class="success-box" id="successBox">
 
-    <h2>Order Successful!</h2>
+  <div class="success-icon">✅</div>
 
-    <p>Your order has been submitted successfully.</p>
+  <h2>Order Successful!</h2>
 
-    <div class="order-id">
-      Order ID:
-      <strong id="orderId">-</strong>
+  <p>Your order has been submitted successfully.</p>
+
+  <div class="order-id">
+    Order ID:
+    <strong id="orderId">-</strong>
+  </div>
+
+  <div class="summary">
+
+    <div>
+      🎮 Game:
+      <strong>Free Fire</strong>
     </div>
 
-    <div class="summary">
-
-      <div>
-        🎮 Game:
-        <strong>Free Fire</strong>
-      </div>
-
-      <div>
-        🆔 UID:
-        <strong id="summaryUid">-</strong>
-      </div>
-
-      <div>
-        👤 Player:
-        <strong id="summaryPlayer">-</strong>
-      </div>
-
-      <div>
-        💎 Package:
-        <strong id="summaryPackage">-</strong>
-      </div>
-
-      <div>
-        💰 Price:
-        <strong id="summaryPrice">-</strong>
-      </div>
-
-      <div>
-        💳 Payment:
-        <strong id="summaryPayment">-</strong>
-      </div>
-
-      <div>
-        📌 Status:
-        <strong>Pending</strong>
-      </div>
-
+    <div>
+      🆔 UID:
+      <strong id="summaryUid">-</strong>
     </div>
 
-    <button class="new-order-btn" onclick="newOrder()">
-      New Order
-    </button>
+    <div>
+      👤 Player:
+      <strong id="summaryPlayer">-</strong>
+    </div>
 
-  </section>
+    <div>
+      💎 Package:
+      <strong id="summaryPackage">-</strong>
+    </div>
+
+    <div>
+      💰 Price:
+      <strong id="summaryPrice">-</strong>
+    </div>
+
+    <div>
+      💳 Payment:
+      <strong id="summaryPayment">-</strong>
+    </div>
+
+    <div>
+      📌 Status:
+      <strong>Pending</strong>
+    </div>
+
+  </div>
+
+  <button class="new-order-btn" onclick="newOrder()">
+    New Order
+  </button>
+
+</section>
 
 
-  <footer>
-    © 2026 LEVEL TOP UP. All Rights Reserved.
-  </footer>
+<footer>
+  © 2026 LEVEL TOP UP. All Rights Reserved.
+</footer>
 
 
-  <script>
+<script>
 
-    const SUPABASE_URL =
-      "https://zdsbesearohgzaxtuggj.supabase.co";
+const SUPABASE_URL =
+  "https://zdsbesearohgzaxtuggj.supabase.co";
 
-    const SUPABASE_KEY =
-      "sb_publishable_5bGKfHKbmp7-Fbe0gdMLfg_e7VaSm8-";
-
-
-    let selectedPackage = "";
-    let selectedPrice = 0;
+const SUPABASE_KEY =
+  "sb_publishable_5bGKfHKbmp7-Fbe0gdMLfg_e7VaSm8-";
 
 
-    function selectPackage(packageName, price) {
+let selectedPackage = "";
+let selectedPrice = 0;
 
-      selectedPackage = packageName;
-      selectedPrice = price;
 
-      document.getElementById("selectedPackage").innerHTML =
-        "Package: <strong>" +
-        packageName +
-        "</strong> — ৳ " +
-        price;
+/* SELECT PACKAGE */
 
-      document.getElementById("orderForm").style.display =
-        "block";
+function selectPackage(packageName, price) {
 
-      document.getElementById("paymentBox").style.display =
-        "none";
+  selectedPackage = packageName;
+  selectedPrice = price;
 
-      document.getElementById("message").style.display =
-        "none";
+  document.getElementById("selectedPackage").innerHTML =
+    "Package: <strong>" +
+    packageName +
+    "</strong> — ৳ " +
+    price;
 
-      document.getElementById("orderForm").scrollIntoView({
-        behavior: "smooth"
-      });
+  document.getElementById("orderForm").style.display =
+    "block";
+
+  document.getElementById("paymentBox").style.display =
+    "none";
+
+  document.getElementById("message").style.display =
+    "none";
+
+  document.getElementById("orderForm").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+
+/* CONTINUE PAYMENT */
+
+function showPayment() {
+
+  const uid =
+    document.getElementById("uid").value.trim();
+
+  const playerName =
+    document.getElementById("playerName").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+
+  if (uid === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please enter your Free Fire UID.";
+
+    return;
+  }
+
+
+  if (playerName === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please enter your Player Name.";
+
+    return;
+  }
+
+
+  message.style.display = "none";
+
+  document.getElementById("paymentBox").style.display =
+    "block";
+
+  document.getElementById("paymentBox").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+
+/* PAYMENT NUMBER */
+
+function showPaymentNumber() {
+
+  const method =
+    document.getElementById("paymentMethod").value;
+
+  const paymentInfo =
+    document.getElementById("paymentInfo");
+
+
+  if (method === "bKash") {
+
+    paymentInfo.innerHTML = `
+      📱 bKash Number:
+      <strong>01856927219</strong>
+
+      <br>
+
+      💸 Send Money:
+      <strong>৳ ${selectedPrice}</strong>
+
+      <div class="payment-note">
+        ⚠️ Send the exact amount and enter the Transaction ID below.
+      </div>
+    `;
+
+  }
+
+  else if (method === "Nagad") {
+
+    paymentInfo.innerHTML = `
+      📱 Nagad Number:
+      <strong>01856927219</strong>
+
+      <br>
+
+      💸 Send Money:
+      <strong>৳ ${selectedPrice}</strong>
+
+      <div class="payment-note">
+        ⚠️ Send the exact amount and enter the Transaction ID below.
+      </div>
+    `;
+
+  }
+
+  else {
+
+    paymentInfo.innerHTML =
+      "Select a payment method.";
+
+  }
+}
+
+
+/* PLACE ORDER */
+
+async function placeOrder() {
+
+  const uid =
+    document.getElementById("uid").value.trim();
+
+  const playerName =
+    document.getElementById("playerName").value.trim();
+
+  const paymentMethod =
+    document.getElementById("paymentMethod").value;
+
+  const transactionId =
+    document.getElementById("transactionId").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+
+  if (uid === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please enter your Free Fire UID.";
+
+    return;
+  }
+
+
+  if (playerName === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please enter your Player Name.";
+
+    return;
+  }
+
+
+  if (paymentMethod === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please select a payment method.";
+
+    return;
+  }
+
+
+  if (transactionId === "") {
+
+    message.style.display = "block";
+
+    message.innerText =
+      "⚠️ Please enter your Transaction ID.";
+
+    return;
+  }
+
+
+  message.style.display = "block";
+
+  message.innerText =
+    "⏳ Submitting your order...";
+
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/orders",
+      {
+        method: "POST",
+
+        headers: {
+
+          "Content-Type":
+            "application/json",
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " + SUPABASE_KEY,
+
+          "Prefer":
+            "return=minimal"
+        },
+
+        body: JSON.stringify({
+
+          uid: uid,
+
+          player_name:
+            playerName,
+
+          package:
+            selectedPackage,
+
+          price:
+            selectedPrice,
+
+          payment_method:
+            paymentMethod,
+
+          transaction_id:
+            transactionId,
+
+          status:
+            "Pending"
+
+        })
+      }
+    );
+
+
+    if (!response.ok) {
+
+      const errorText =
+        await response.text();
+
+      console.error(
+        "Supabase error:",
+        errorText
+      );
+
+      throw new Error(errorText);
     }
 
 
-    function showPayment() {
+    /* SUCCESS */
 
-      const uid =
-        document.getElementById("uid").value.trim();
+    const orderId =
+      "LT-" + Date.now();
 
-      const playerName =
-        document.getElementById("playerName").value.trim();
 
-      const message =
-        document.getElementById("message");
+    document.getElementById("orderId").innerText =
+      orderId;
 
+    document.getElementById("summaryUid").innerText =
+      uid;
 
-      if (uid === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please enter your Free Fire UID.";
-        return;
-      }
+    document.getElementById("summaryPlayer").innerText =
+      playerName;
 
+    document.getElementById("summaryPackage").innerText =
+      selectedPackage;
 
-      if (playerName === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please enter your Player Name.";
-        return;
-      }
+    document.getElementById("summaryPrice").innerText =
+      "৳ " + selectedPrice;
 
+    document.getElementById("summaryPayment").innerText =
+      paymentMethod;
 
-      message.style.display = "none";
 
-      document.getElementById("paymentBox").style.display =
-        "block";
+    document.getElementById("orderForm").style.display =
+      "none";
 
-      document.getElementById("paymentBox").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
+    document.getElementById("successBox").style.display =
+      "block";
 
 
-    function showPaymentNumber() {
+    document.getElementById("successBox").scrollIntoView({
+      behavior: "smooth"
+    });
 
-      const method =
-        document.getElementById("paymentMethod").value;
 
-      const paymentInfo =
-        document.getElementById("paymentInfo");
+    /* CLEAR FORM */
 
+    document.getElementById("uid").value = "";
 
-      if (method === "bKash") {
+    document.getElementById("playerName").value = "";
 
-        paymentInfo.innerHTML =
-          "📱 bKash Number: <strong>01XXXXXXXXX</strong><br>" +
-          "Send Money to this number.";
+    document.getElementById("paymentMethod").value = "";
 
-      } else if (method === "Nagad") {
+    document.getElementById("transactionId").value = "";
 
-        paymentInfo.innerHTML =
-          "📱 Nagad Number: <strong>01XXXXXXXXX</strong><br>" +
-          "Send Money to this number.";
+    document.getElementById("paymentBox").style.display =
+      "none";
 
-      } else {
+    message.style.display =
+      "none";
 
-        paymentInfo.innerHTML =
-          "Select a payment method.";
-      }
-    }
+  }
 
+  catch (error) {
 
-    async function placeOrder() {
+    console.error(error);
 
-      const uid =
-        document.getElementById("uid").value.trim();
+    message.style.display =
+      "block";
 
-      const playerName =
-        document.getElementById("playerName").value.trim();
+    message.innerText =
+      "❌ Order failed. Please try again.";
+  }
+}
 
-      const paymentMethod =
-        document.getElementById("paymentMethod").value;
 
-      const transactionId =
-        document.getElementById("transactionId").value.trim();
+/* NEW ORDER */
 
-      const message =
-        document.getElementById("message");
+function newOrder() {
 
+  document.getElementById("successBox").style.display =
+    "none";
 
-      if (uid === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please enter your Free Fire UID.";
-        return;
-      }
+  document.getElementById("orderForm").style.display =
+    "none";
 
+  document.getElementById("games").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 
-      if (playerName === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please enter your Player Name.";
-        return;
-      }
-
-
-      if (paymentMethod === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please select a payment method.";
-        return;
-      }
-
-
-      if (transactionId === "") {
-        message.style.display = "block";
-        message.innerText =
-          "⚠️ Please enter your Transaction ID.";
-        return;
-      }
-
-
-      message.style.display = "block";
-      message.innerText =
-        "⏳ Submitting your order...";
-
-
-      try {
-
-        const response = await fetch(
-          SUPABASE_URL + "/rest/v1/orders",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json",
-              "apikey": SUPABASE_KEY,
-              "Authorization":
-                "Bearer " + SUPABASE_KEY,
-
-              /*
-                গুরুত্বপূর্ণ:
-                এখানে representation নয়,
-                minimal response ব্যবহার করা হয়েছে।
-              */
-              "Prefer": "return=minimal"
-            },
-
-            body: JSON.stringify({
-
-              uid: uid,
-
-              player_name: playerName,
-
-              package: selectedPackage,
-
-              price: selectedPrice,
-
-              payment_method: paymentMethod,
-
-              transaction_id: transactionId,
-
-              status: "Pending"
-
-            })
-          }
-        );
-
-
-        if (!response.ok) {
-
-          const errorText =
-            await response.text();
-
-          console.error(
-            "Supabase error:",
-            errorText
-          );
-
-          throw new Error(errorText);
-        }
-
-
-        /*
-          INSERT সফল।
-          return=minimal হওয়ায়
-          response.json() করা হবে না।
-        */
-
-        const orderId =
-          "LT-" + Date.now();
-
-
-        document.getElementById("orderId").innerText =
-          orderId;
-
-        document.getElementById("summaryUid").innerText =
-          uid;
-
-        document.getElementById("summaryPlayer").innerText =
-          playerName;
-
-        document.getElementById("summaryPackage").innerText =
-          selectedPackage;
-
-        document.getElementById("summaryPrice").innerText =
-          "৳ " + selectedPrice;
-
-        document.getElementById("summaryPayment").innerText =
-          paymentMethod;
-
-
-        document.getElementById("orderForm").style.display =
-          "none";
-
-        document.getElementById("successBox").style.display =
-          "block";
-
-        document.getElementById("successBox").scrollIntoView({
-          behavior: "smooth"
-        });
-
-
-        document.getElementById("uid").value = "";
-        document.getElementById("playerName").value = "";
-        document.getElementById("paymentMethod").value = "";
-        document.getElementById("transactionId").value = "";
-
-        document.getElementById("paymentBox").style.display =
-          "none";
-
-        message.style.display = "none";
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        message.style.display = "block";
-
-        message.innerText =
-          "❌ Order failed. Please try again.";
-      }
-    }
-
-
-    function newOrder() {
-
-      document.getElementById("successBox").style.display =
-        "none";
-
-      document.getElementById("orderForm").style.display =
-        "none";
-
-      document.getElementById("games").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-
-  </script>
+</script>
 
 </body>
-            </html>
+  </html>
