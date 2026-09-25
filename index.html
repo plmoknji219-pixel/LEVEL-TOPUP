@@ -17,7 +17,6 @@
     body {
       background: #0b0f19;
       color: white;
-      min-height: 100vh;
     }
 
     header {
@@ -28,55 +27,548 @@
     }
 
     header h1 {
-      font-size: 28px;
       color: #00e5ff;
+      font-size: 28px;
     }
 
     header p {
-      margin-top: 6px;
       color: #9ca3af;
-      font-size: 14px;
+      margin-top: 6px;
     }
 
     .hero {
-      padding: 60px 20px;
       text-align: center;
+      padding: 50px 20px;
     }
 
     .hero h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
+      font-size: 32px;
+      margin-bottom: 12px;
     }
 
-    .hero h2 span {
+    .hero span {
       color: #00e5ff;
     }
 
     .hero p {
       color: #9ca3af;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .btn {
       display: inline-block;
-      padding: 13px 28px;
+      padding: 12px 25px;
       background: #00e5ff;
       color: #000;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: bold;
     }
 
     .games {
-      padding: 20px;
       max-width: 900px;
       margin: auto;
+      padding: 20px;
     }
 
-    .games h2 {
+    .games > h2 {
       text-align: center;
       margin-bottom: 20px;
     }
 
     .game-box {
-     
+      background: #111827;
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid #1f2937;
+    }
+
+    .game-box > h3 {
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .game-box > p {
+      text-align: center;
+      color: #9ca3af;
+      margin: 8px 0 20px;
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+    }
+
+    .package {
+      background: #0b0f19;
+      border: 1px solid #263244;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .package h4 {
+      color: #00e5ff;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .buy-btn,
+    .continue-btn,
+    .place-order-btn {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      background: #00e5ff;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .order-form {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #111827;
+      border: 1px solid #263244;
+      border-radius: 12px;
+    }
+
+    .order-form h3 {
+      color: #00e5ff;
+      margin-bottom: 8px;
+    }
+
+    .selected-package {
+      color: #9ca3af;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 7px;
+      font-size: 14px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #263244;
+      border-radius: 8px;
+      background: #0b0f19;
+      color: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #00e5ff;
+    }
+
+    .payment-box {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #263244;
+    }
+
+    .payment-info {
+      background: #0b0f19;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 15px 0;
+      line-height: 1.7;
+    }
+
+    .payment-info strong {
+      color: #00e5ff;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #172033;
+      color: #00e5ff;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #6b7280;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>LEVEL TOP UP</h1>
+    <p>Fast & Easy Game Top Up</p>
+  </header>
+
+  <section class="hero">
+
+    <h2>Welcome to <span>LEVEL TOP UP</span></h2>
+
+    <p>Fast, easy and secure game top up.</p>
+
+    <a href="#games" class="btn">TOP UP NOW</a>
+
+  </section>
+
+  <section class="games" id="games">
+
+    <h2>🎮 Select Your Game</h2>
+
+    <div class="game-box">
+
+      <h3>🔥 Free Fire</h3>
+
+      <p>Choose your Diamond Package</p>
+
+      <div class="packages">
+
+        <div class="package">
+          <h4>💎 25 Diamonds</h4>
+          <div class="price">৳ 20</div>
+          <button class="buy-btn"
+            onclick="selectPackage('25 Diamonds', 20)">
+            Buy Now
+          </button>
+        </div>
+
+        <div class="package">
+          <h4>💎 50 Diamonds</h4>
+          <div class="price">৳ 35</div>
+          <button class="buy-btn"
+            onclick="selectPackage('50 Diamonds', 35)">
+            Buy Now
+          </button>
+        </div>
+
+        <div class="package">
+          <h4>💎 115 Diamonds</h4>
+          <div class="price">৳ 75</div>
+          <button class="buy-btn"
+            onclick="selectPackage('115 Diamonds', 75)">
+            Buy Now
+          </button>
+        </div>
+
+        <div class="package">
+          <h4>💎 240 Diamonds</h4>
+          <div class="price">৳ 150</div>
+          <button class="buy-btn"
+            onclick="selectPackage('240 Diamonds', 150)">
+            Buy Now
+          </button>
+        </div>
+
+        <div class="package">
+          <h4>💎 610 Diamonds</h4>
+          <div class="price">৳ 380</div>
+          <button class="buy-btn"
+            onclick="selectPackage('610 Diamonds', 380)">
+            Buy Now
+          </button>
+        </div>
+
+      </div>
+
+      <div class="order-form" id="orderForm">
+
+        <h3>📝 Order Details</h3>
+
+        <div class="selected-package" id="selectedPackage">
+          Package: -
+        </div>
+
+        <label for="uid">Free Fire UID</label>
+        <input
+          type="number"
+          id="uid"
+          placeholder="Enter your Free Fire UID"
+        >
+
+        <label for="playerName">Player Name</label>
+        <input
+          type="text"
+          id="playerName"
+          placeholder="Enter your player name"
+        >
+
+        <button class="continue-btn" onclick="showPayment()">
+          Continue to Payment
+        </button>
+
+        <div class="payment-box" id="paymentBox">
+
+          <h3>💳 Payment</h3>
+
+          <label for="paymentMethod">
+            Select Payment Method
+          </label>
+
+          <select id="paymentMethod" onchange="showPaymentNumber()">
+            <option value="">Select Payment Method</option>
+            <option value="bKash">bKash</option>
+            <option value="Nagad">Nagad</option>
+          </select>
+
+          <div class="payment-info" id="paymentInfo">
+            Select a payment method.
+          </div>
+
+          <label for="transactionId">
+            Transaction ID
+          </label>
+
+          <input
+            type="text"
+            id="transactionId"
+            placeholder="Enter your Transaction ID"
+          >
+
+          <button
+            class="place-order-btn"
+            onclick="placeOrder()">
+            Place Order
+          </button>
+
+        </div>
+
+        <div class="message" id="message"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 LEVEL TOP UP. All Rights Reserved.
+  </footer>
+
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://zdsbesearohgzaxtuggj.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_5bGKfHKbmp7-Fbe0gdMLfg_e7VaSm8-";
+
+
+    let selectedPackage = "";
+    let selectedPrice = 0;
+
+
+    function selectPackage(packageName, price) {
+
+      selectedPackage = packageName;
+      selectedPrice = price;
+
+      document.getElementById("selectedPackage").innerHTML =
+        "Package: <strong>" +
+        packageName +
+        "</strong> — ৳ " +
+        price;
+
+      document.getElementById("orderForm").style.display = "block";
+
+      document.getElementById("paymentBox").style.display = "none";
+
+      document.getElementById("orderForm").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+
+    function showPayment() {
+
+      const uid =
+        document.getElementById("uid").value.trim();
+
+      const playerName =
+        document.getElementById("playerName").value.trim();
+
+      const message =
+        document.getElementById("message");
+
+
+      if (uid === "") {
+        message.style.display = "block";
+        message.innerText =
+          "⚠️ Please enter your Free Fire UID.";
+        return;
+      }
+
+
+      if (playerName === "") {
+        message.style.display = "block";
+        message.innerText =
+          "⚠️ Please enter your Player Name.";
+        return;
+      }
+
+
+      message.style.display = "none";
+
+      document.getElementById("paymentBox").style.display =
+        "block";
+
+      document.getElementById("paymentBox").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+
+    function showPaymentNumber() {
+
+      const method =
+        document.getElementById("paymentMethod").value;
+
+      const paymentInfo =
+        document.getElementById("paymentInfo");
+
+
+      if (method === "bKash") {
+
+        paymentInfo.innerHTML =
+          "📱 bKash Number: <strong>01XXXXXXXXX</strong><br>" +
+          "Send Money to this number.";
+
+      }
+
+      else if (method === "Nagad") {
+
+        paymentInfo.innerHTML =
+          "📱 Nagad Number: <strong>01XXXXXXXXX</strong><br>" +
+          "Send Money to this number.";
+
+      }
+
+      else {
+
+        paymentInfo.innerHTML =
+          "Select a payment method.";
+
+      }
+    }
+
+
+    async function placeOrder() {
+
+      const uid =
+        document.getElementById("uid").value.trim();
+
+      const playerName =
+        document.getElementById("playerName").value.trim();
+
+      const paymentMethod =
+        document.getElementById("paymentMethod").value;
+
+      const transactionId =
+        document.getElementById("transactionId").value.trim();
+
+      const message =
+        document.getElementById("message");
+
+
+      if (!paymentMethod) {
+        message.style.display = "block";
+        message.innerText =
+          "⚠️ Please select a payment method.";
+        return;
+      }
+
+
+      if (!transactionId) {
+        message.style.display = "block";
+        message.innerText =
+          "⚠️ Please enter your Transaction ID.";
+        return;
+      }
+
+
+      message.style.display = "block";
+      message.innerText = "⏳ Submitting your order...";
+
+
+      try {
+
+        const response = await fetch(
+          SUPABASE_URL + "/rest/v1/orders",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Authorization": "Bearer " + SUPABASE_KEY,
+              "Prefer": "return=minimal"
+            },
+
+            body: JSON.stringify({
+              uid: uid,
+              player_name: playerName,
+              package: selectedPackage,
+              price: selectedPrice,
+              payment_method: paymentMethod,
+              transaction_id: transactionId,
+              status: "Pending"
+            })
+          }
+        );
+
+
+        if (!response.ok) {
+
+          const errorText = await response.text();
+
+          throw new Error(errorText);
+        }
+
+
+        message.innerText =
+          "✅ Order submitted successfully!";
+
+        document.getElementById("uid").value = "";
+        document.getElementById("playerName").value = "";
+        document.getElementById("transactionId").value = "";
+        document.getElementById("paymentMethod").value = "";
+
+        document.getElementById("paymentInfo").innerHTML =
+          "Select a payment method.";
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        message.innerText =
+          "❌ Order failed. Please try again.";
+      }
+
+    }
+
+  </script>
+
+</body>
+  </html>
