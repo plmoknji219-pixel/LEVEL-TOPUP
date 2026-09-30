@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Order Status - LEVEL TOPUP</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #080b16, #111827);
+      color: #fff;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 40px auto;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #00e5ff;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #151b2b;
+      border: 1px solid #27324a;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #d1d5db;
+      font-size: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      background: #0d1322;
+      color: white;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+
+    input:focus {
+      border-color: #00e5ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .error {
+      background: #3a1720;
+      color: #ff9aa9;
+      border: 1px solid #71303d;
+    }
+
+    .success {
+      background: #102d23;
+      color: #7ff0bd;
+      border: 1px solid #216448;
+    }
+
+    .order-box {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid #27324a;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .key {
+      color: #9ca3af;
+    }
+
+    .value {
+      color: #fff;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .pending {
+      background: #3a2b08;
+      color: #ffd45c;
+    }
+
+    .processing {
+      background: #092e3a;
+      color: #63dcff;
+    }
+
+    .completed {
+      background: #103521;
+      color: #6df2a8;
+    }
+
+    .cancelled,
+    .failed {
+      background: #3b1820;
+      color: #ff8d9d;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #00d9ff;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .hint {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">LEVEL TOPUP</div>
+    <div class="subtitle">Check Your Order Status</div>
+
+    <div class="card">
+
+      <label for="orderId">Order ID</label>
+
+      <input
+        type="text"
+        id="orderId"
+        placeholder="Enter your Order ID"
+        autocomplete="off"
+      >
+
+      <button id="checkBtn" onclick="checkOrder()">
+        Check Order Status
+      </button>
+
+      <div id="message" class="message"></div>
+
+      <div id="orderBox" class="order-box">
+
+        <div class="row">
+          <span class="key">Order ID</span>
+          <span class="value" id="showId">-</span>
+        </div>
+
+        <div class="row">
+          <span class="key">UID</span>
+          <span class="value" id="showUid">-</span>
+        </div>
+
+        <div class="row">
+          <span class="key">Player Name</span>
+          <span class="value" id="showName">-</span>
+        </div>
+
+        <div class="row">
+          <span class="key">Package</span>
+          <span class="value" id="showPackage">-</span>
+        </div>
+
+        <div class="row">
+          <span class="key">Payment Method</span>
+          <span class="value" id="showPayment">-</span>
+        </div>
+
+        <div class="row">
+          <span class="key">Status</span>
+          <span class="value">
+            <span id="showStatus" class="status">-</span>
+          </span>
+        </div>
+
+      </div>
+
+      <div class="hint">
+        Enter the Order ID you received after placing your order.
+      </div>
+
+    </div>
+
+    <a href="index.html" class="back">
+      ← Back to Home
+    </a>
+
+  </div>
+
+
+  <script>
+
+    // ==============================
+    // SUPABASE CONFIG
+    // ==============================
+
+    const SUPABASE_URL =
+      "https://zdsbesearohgzaxtuggj.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    // ==============================
+    // CHECK ORDER
+    // ==============================
+
+    async function checkOrder() {
+
+      const orderId =
+        document.getElementById("orderId").value.trim();
+
+      const btn =
+        document.getElementById("checkBtn");
+
+      const message =
+        document.getElementById("message");
+
+      const orderBox =
+        document.getElementById("orderBox");
+
+
+      message.style.display = "none";
+      orderBox.style.display = "none";
+
+
+      if (!orderId) {
+
+        showMessage(
+          "Please enter your Order ID.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      btn.disabled = true;
+      btn.textContent = "Checking...";
+
+
+      try {
+
+        const { data, error } =
+          await supabaseClient
+            .from("orders")
+            .select("*")
+            .eq("id", orderId)
+            .maybeSingle();
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        if (!data) {
+
+          showMessage(
+            "Order not found. Please check your Order ID.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        // ==========================
+        // SHOW ORDER DATA
+        // ==========================
+
+        document.getElementById("showId").textContent =
+          data.id ?? "-";
+
+        document.getElementById("showUid").textContent =
+          data.uid ?? "-";
+
+        document.getElementById("showName").textContent =
+          data.player_name ?? "-";
+
+        document.getElementById("showPackage").textContent =
+          data.package ?? data.package_name ?? "-";
+
+        document.getElementById("showPayment").textContent =
+          data.payment_method ?? "-";
+
+
+        const statusElement =
+          document.getElementById("showStatus");
+
+        const status =
+          String(data.status ?? "Pending");
+
+
+        statusElement.textContent = status;
+
+        statusElement.className =
+          "status " + getStatusClass(status);
+
+
+        orderBox.style.display = "block";
+
+
+        showMessage(
+          "Order found successfully.",
+          "success"
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Unable to check order. Please try again.",
+          "error"
+        );
+
+      } finally {
+
+        btn.disabled = false;
+        btn.textContent = "Check Order Status";
+
+      }
+    }
+
+
+    // ==============================
+    // STATUS CLASS
+    // ==============================
+
+    function getStatusClass(status) {
+
+      const value =
+        String(status).toLowerCase();
+
+      if (value.includes("complete")) {
+        return "completed";
+      }
+
+      if (value.includes("process")) {
+        return "processing";
+      }
+
+      if (
+        value.includes("cancel") ||
+        value.includes("fail")
+      ) {
+        return "cancelled";
+      }
+
+      return "pending";
+    }
+
+
+    // ==============================
+    // MESSAGE
+    // ==============================
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+      message.style.display = "block";
+    }
+
+
+    // ==============================
+    // ENTER KEY
+    // ==============================
+
+    document
+      .getElementById("orderId")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+          checkOrder();
+        }
+
+      });
+
+  </script>
+
+</body>
+  </html>
